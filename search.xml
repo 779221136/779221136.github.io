@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>trie</title>
+      <link href="/2022/02/01/trie/"/>
+      <url>/2022/02/01/trie/</url>
+      
+        <content type="html"><![CDATA[<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><ul><li>字典树可以加快查询的速度，更快的找出符合条件的元素</li></ul><h3 id="基本变量"><a href="#基本变量" class="headerlink" title="基本变量"></a>基本变量</h3><pre class="line-numbers language-none"><code class="language-none">int idx; &#x2F;&#x2F;下标，从1开始,0为判断为空的条件char e[N]; &#x2F;&#x2F;用来记录idx位置的字符int ne[N][26]; &#x2F;&#x2F;下一个的地址(idx)此处以字符串为例,共有26个字母<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="基本插入操作"><a href="#基本插入操作" class="headerlink" title="基本插入操作"></a>基本插入操作</h3><pre class="line-numbers language-none"><code class="language-none">void insert(string s)&#123; &#x2F;&#x2F;s为插入的字符串int p &#x3D; 0; &#x2F;&#x2F;0为根结点int u; &#x2F;&#x2F;将26个英文字母映射到数字0-25上，用u表示for(int i &#x3D; 0; i &lt; (int)s.size(); i ++ )&#123;u &#x3D; s[i] - &#39;a&#39; &#x2F;&#x2F;转换e[++ idx] &#x3D; s[i];if (ne[p][u] &#x3D;&#x3D; 0) ne[p][u] &#x3D; idx;p &#x3D; ne[p][u];&#125;op; &#x2F;&#x2F; 此处为操作，这时p已经指向字符串最后一个字符&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="基本查询操作"><a href="#基本查询操作" class="headerlink" title="基本查询操作"></a>基本查询操作</h3><pre class="line-numbers language-none"><code class="language-none">int query(string s)&#123;int res; &#x2F;&#x2F; 结果int p &#x3D; 0;    int u;    for(int i &#x3D; 0; i &lt; s.size(); i ++)    &#123;        u &#x3D; s[i] - &#39;a&#39;;        if(ne[p][u] &#x3D;&#x3D; 0) return 0;&#x2F;&#x2F;此处的结果若为零，则代表此处被插入时没有被遍历到        p &#x3D; ne[p][u];    &#125;    return res;&#x2F;&#x2F;结果，自操作&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><ul><li><p><a href="https://www.acwing.com/problem/content/837/">Acwing:835. Trie字符串统计</a></p></li><li><p>代码：</p></li></ul><pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;#include &lt;cstring&gt;using namespace std;const int N &#x3D; 1e5 + 10;int n, idx;string s;char op;int cnt[N], son[N][26];void insert(string s)&#123;    int p &#x3D; 0;    int u;    for(int i &#x3D; 0; i &lt; s.size(); i ++)    &#123;        u &#x3D; s[i] - &#39;a&#39;;        if(son[p][u] &#x3D;&#x3D; 0) son[p][u] &#x3D; ++ idx;        p &#x3D; son[p][u];    &#125;    cnt[p] ++;&#125;int query(string s)&#123;    int p &#x3D; 0;    int u;    for(int i &#x3D; 0; i &lt; s.size(); i ++)    &#123;        u &#x3D; s[i] - &#39;a&#39;;        if(son[p][u] &#x3D;&#x3D; 0) return 0;        p &#x3D; son[p][u];    &#125;    return cnt[p];&#125;int main()&#123;    scanf(&quot;%d&quot;, &amp;n);        while(n --)    &#123;        cin &gt;&gt; op &gt;&gt; s;        if(op &#x3D;&#x3D; &#39;I&#39;) insert(s);        else cout &lt;&lt; query(s) &lt;&lt; endl;    &#125;    return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 字典树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>滑动窗口</title>
+      <link href="/2022/01/28/hua-dong-chuang-kou/"/>
+      <url>/2022/01/28/hua-dong-chuang-kou/</url>
+      
+        <content type="html"><![CDATA[<h3 id="前记"><a href="#前记" class="headerlink" title="前记"></a>前记</h3><ul><li>今天一个学弟问了我一个题，如图</li></ul><p><img src="/medias/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/1.jpg" alt="题目"></p><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul><li>对于某个字符串而言，如果他满足题目要求，在限制在[L, R]内的所有长度大于该字符串的字符串都满足条件</li><li>故用双指针模拟滑动窗口，找出字符串中每个字符，以其为起始位置的长度最短的满足条件的结束位置</li></ul><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;int table[4];   &#x2F;&#x2F;各个种类出现的次数int cnt, res;int l, r;   &#x2F;&#x2F;最短和最长的字符串长度string s;   &#x2F;&#x2F;字符串int main()&#123;    cin &gt;&gt; s;    cin &gt;&gt; l &gt;&gt; r;    int n &#x3D; s.size();    for (int k &#x3D; 0; k &lt; n; k ++ )&#123;  &#x2F;&#x2F;不解释        if (s[k] &lt;&#x3D; &#39;z&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;a&#39;) s[k] &#x3D; &#39;0&#39;;        else if (s[k] &lt;&#x3D; &#39;Z&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;A&#39;) s[k] &#x3D; &#39;1&#39;;        else if (s[k] &lt;&#x3D; &#39;9&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;0&#39;) s[k] &#x3D; &#39;2&#39;;        else s[k] &#x3D; &#39;3&#39;;    &#125;    cnt &#x3D; 0;    &#x2F;&#x2F;当前种类的数量；    res &#x3D; 0;    &#x2F;&#x2F;方案数    int i, j;    for (i &#x3D; 0, j &#x3D; 0; j &lt; n; j ++ )&#123;   &#x2F;&#x2F;遍历        int a &#x3D; s[j] - &#39;0&#39;;             &#x2F;&#x2F;当前字符所属的种类        table[a] ++;        if (table[a] &#x3D;&#x3D; 1) cnt ++;  &#x2F;&#x2F;如果++之后的结果为1，则代表之前为0，种类加一；        while (cnt &#x3D;&#x3D; 3)&#123;   &#x2F;&#x2F;当cnt种类为3的时候开始计算            int x &#x3D; max(i + l - 1, j);  &#x2F;&#x2F;字符串最短的位置，为j和最短字符串i + l - 1之中最大的一个            int y &#x3D; min(i + r - 1, n - 1);  &#x2F;&#x2F;字符串最长的位置为n - 1和最长字符串i + r - 1 中最小的一个            if (x &lt;&#x3D; y)&#123;    &#x2F;&#x2F;只有当最长的长度大于等于最小的时候才计算                res +&#x3D; (y - x + 1);            &#125;            int a &#x3D; s[i] - &#39;0&#39;; &#x2F;&#x2F;当前i所属种类            table[a] --;    &#x2F;&#x2F;出现次数减一            if (table[a] &#x3D;&#x3D; 0) cnt --;  &#x2F;&#x2F;如果此时该种类数变成0了则代表该种类已经无了            i ++;   &#x2F;&#x2F;i向后挪一位        &#125;    &#125;    cout &lt;&lt; res &lt;&lt; endl;    return 0;&#125;&#x2F;&#x2F;abs1231..ds123.. <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><hr><h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ul><li><p>把代码发给学弟之后没有<code>AC</code>，只通过了<code>69%</code>的案例，然后重新整理思路，根据题目给的数据范围，发现<code>res</code>可能会超过<code>1e9+7</code>,故<code>res</code>要开成<code>longlong</code>类型</p></li><li><p>修改后：</p><pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;tyoedef long long int LL;int table[4];   &#x2F;&#x2F;各个种类出现的次数int cnt &#x3D; 0;LL res &#x3D; 0;LL l, r;   &#x2F;&#x2F;最短和最长的字符串长度string s;   &#x2F;&#x2F;字符串int main()&#123;    cin &gt;&gt; s;    cin &gt;&gt; l &gt;&gt; r;    int n &#x3D; s.size();    for (int k &#x3D; 0; k &lt; n; k ++ )&#123;  &#x2F;&#x2F;不解释        if (s[k] &lt;&#x3D; &#39;z&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;a&#39;) s[k] &#x3D; &#39;0&#39;;        else if (s[k] &lt;&#x3D; &#39;Z&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;A&#39;) s[k] &#x3D; &#39;1&#39;;        else if (s[k] &lt;&#x3D; &#39;9&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;0&#39;) s[k] &#x3D; &#39;2&#39;;        else s[k] &#x3D; &#39;3&#39;;    &#125;    cnt &#x3D; 0;    &#x2F;&#x2F;当前种类的数量；    res &#x3D; 0;    &#x2F;&#x2F;方案数    int i, j;    for (i &#x3D; 0, j &#x3D; 0; j &lt; n; j ++ )&#123;   &#x2F;&#x2F;遍历        int a &#x3D; s[j] - &#39;0&#39;;             &#x2F;&#x2F;当前字符所属的种类        table[a] ++;        if (table[a] &#x3D;&#x3D; 1) cnt ++;  &#x2F;&#x2F;如果++之后的结果为1，则代表之前为0，种类加一；        while (cnt &#x3D;&#x3D; 3)&#123;   &#x2F;&#x2F;当cnt种类为3的时候开始计算            LL x &#x3D; max(i + l - 1, j);  &#x2F;&#x2F;字符串最短的位置，为j和最短字符串i + l - 1之中最大的一个            LL y &#x3D; min(i + r - 1, n - 1);  &#x2F;&#x2F;字符串最长的位置为n - 1和最长字符串i + r - 1 中最小的一个            if (x &lt;&#x3D; y)&#123;    &#x2F;&#x2F;只有当最长的长度大于等于最小的时候才计算                res +&#x3D; (y - x + 1);            &#125;            int a &#x3D; s[i] - &#39;0&#39;; &#x2F;&#x2F;当前i所属种类            table[a] --;    &#x2F;&#x2F;出现次数减一            if (table[a] &#x3D;&#x3D; 0) cnt --;  &#x2F;&#x2F;如果此时该种类数变成0了则代表该种类已经无了            i ++;   &#x2F;&#x2F;i向后挪一位        &#125;    &#125;    cout &lt;&lt; res &lt;&lt; endl;    return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 滑动窗口 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>KMP</title>
+      <link href="/2022/01/28/kmp/"/>
+      <url>/2022/01/28/kmp/</url>
+      
+        <content type="html"><![CDATA[<h3 id="前记"><a href="#前记" class="headerlink" title="前记"></a>前记</h3><ul><li>KMP用的很少，所以经常会忘记，故这里记录一下思路和源码</li></ul><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><ul><li><a href="https://www.acwing.com/problem/content/833/">Acwing:831. KMP字符串</a></li></ul><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul><li>模式串<code>P</code>在模版串<code>S</code>中多次出现，如果对<code>S</code>中每一个位置的字符都从<code>P</code>的第一个字符串开始匹配则会浪费很多时间</li><li>KMP的思路就是先对模式串<code>P</code>进行匹配，找到<code>P</code>中每个字符没有被匹配的时候可以往前跳跃的位置，<code>S</code>也就跳跃了</li></ul><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;#include &lt;cstring&gt;using namespace std;const int N &#x3D; 1e5 + 10;const int M &#x3D; 1e6 + 10;int n, m;int ne[N];&#x2F;&#x2F;char s1[N], s2[M];int main()&#123;       string s1, s2;    scanf(&quot;%d&quot;, &amp;n);    cin &gt;&gt; s1;    scanf(&quot;%d&quot;, &amp;m);    cin &gt;&gt; s2;        &#x2F;&#x2F;字符串从0开始;    ne[0] &#x3D; -1;         for(int i &#x3D; 1, j &#x3D; -1; i &lt; n; i ++)&#x2F;&#x2F;第一个不用跳    &#123;        while(j &gt;&#x3D; 0 &amp;&amp; s1[i] !&#x3D; s1[j + 1]) j &#x3D; ne[j]; &#x2F;&#x2F;当j不为-1,并且i和j+1处的字符不相同是,j进行跳跃        if(s1[i] &#x3D;&#x3D; s1[j + 1]) j ++;&#x2F;&#x2F;j不为-1,则i可以跳跃的位置为j+1；        ne[i] &#x3D; j;&#x2F;&#x2F;记录    &#125;        for(int i &#x3D; 0, j &#x3D; -1; i &lt; m; i ++)    &#123;        while (j &gt;&#x3D; 0 &amp;&amp; s2[i] !&#x3D; s1[j + 1]) j &#x3D; ne[j];&#x2F;&#x2F;当j大于0,并且串的字符不相同时,进行跳跃        if(s2[i] &#x3D;&#x3D; s1[j + 1]) j ++;        if(j &#x3D;&#x3D; n - 1)&#x2F;&#x2F;当j的值为模式串的长度时，代表匹配成功        &#123;            cout &lt;&lt; i - j &lt;&lt; &#39; &#39;; &#x2F;&#x2F; 模版串的字符所在位置减去模式串的长度即为匹配开始的位置        &#125;    &#125;        return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 字符串匹配 </tag>
+            
+            <tag> KMP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>通配符匹配</title>
+      <link href="/2022/01/25/tong-pei-fu-pi-pei/"/>
+      <url>/2022/01/25/tong-pei-fu-pi-pei/</url>
+      
+        <content type="html"><![CDATA[<h3 id="闭包运算"><a href="#闭包运算" class="headerlink" title="闭包运算*:"></a>闭包运算<code>*</code>:</h3><pre class="line-numbers language-none"><code class="language-none">a* &#x3D; &#123;&#123;&#125;,&#123;a&#125;,&#123;aa&#125;,&#123;aaa&#125;.....&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="栗子：leetcode-44-通配符匹配"><a href="#栗子：leetcode-44-通配符匹配" class="headerlink" title="栗子：leetcode:44. 通配符匹配"></a>栗子：<a href="https://leetcode-cn.com/problems/wildcard-matching/">leetcode:44. 通配符匹配</a></h3><h4 id="这题TM居然是动态规划？我最开始的思路是模拟但结果总是掉情况，决定看题解—-只能说真是太妙了"><a href="#这题TM居然是动态规划？我最开始的思路是模拟但结果总是掉情况，决定看题解—-只能说真是太妙了" class="headerlink" title="这题TM居然是动态规划？我最开始的思路是模拟但结果总是掉情况，决定看题解—-只能说真是太妙了"></a>这题TM居然是动态规划？我最开始的思路是模拟但结果总是掉情况，决定看题解—-只能说真是太妙了</h4><h3 id="基本思路："><a href="#基本思路：" class="headerlink" title="基本思路："></a>基本思路：</h3><p>对于模式串<code>p</code>而言，只要有一种情况能与匹配串<code>s</code>匹配即可，即对于<code>s</code>当前的位置<code>i</code>而言，只需<code>s[0]</code>到<code>s[i-1]</code>已经匹配，并且<code>s[i]</code>可以匹配即可，故可以对双指针<code>i</code>和<code>j</code>分别对匹配串<code>s</code>和模式串<code>p</code>进行遍历，<code>dp[i][j]</code>代表<code>s</code>的前<code>i</code>个字符与<code>p</code>的前<code>j</code>个是否匹配，分为以下两种情况：</p><p>1.模式串当前位置<code>p[j]</code>不为<code>*</code>，则只需要<code>dp[i-1][j-1]</code>可以匹配，并且<code>s[i]</code>和<code>p[j]</code>相同或者<code>p[j]</code>为<code>?</code></p><p>2.模式串当前位置<code>p[j]</code>为<code>*</code>，则对于<code>p[j-1]</code>可以有0个或者多个，即<code>dp[i][j-1]</code>匹配(多个<code>p[j-1]</code>),或者<code>dp[i-1][j]</code>匹配(0个<code>p[j]</code>)</p><h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><pre class="line-numbers language-none"><code class="language-none">class Solution &#123;public:    bool isMatch(string s, string p) &#123;        int n &#x3D; s.size(), m &#x3D; p.size();        bool dp[n + 1][m + 1];        memset(dp, false, sizeof dp);        dp[0][0] &#x3D; true;        s &#x3D; &#39; &#39; + s;        p &#x3D; &#39; &#39; + p;        for (int i &#x3D; 0; i &lt;&#x3D; n; i ++ )&#123;            for (int j &#x3D; 1; j &lt;&#x3D; m; j ++ )&#123;                if (i &amp;&amp; p[j] !&#x3D; &#39;*&#39;) &#123;                    dp[i][j] &#x3D; dp[i - 1][j - 1] &amp;&amp; (s[i] &#x3D;&#x3D; p[j] || p[j] &#x3D;&#x3D; &#39;?&#39;);                &#125;else if (p[j] &#x3D;&#x3D; &#39;*&#39;) &#123;                    dp[i][j] &#x3D; dp[i][j - 1] || i &amp;&amp; dp[i - 1][j];&#x2F;&#x2F;为了i-1有意义故要加上判断i是否为0                &#125;            &#125;        &#125;        return dp[n][m];    &#125;&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 动态规划 </tag>
+            
+            <tag> 计算理论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>摩尔投票</title>
+      <link href="/2022/01/25/mo-er-tou-piao/"/>
+      <url>/2022/01/25/mo-er-tou-piao/</url>
+      
+        <content type="html"><![CDATA[<h3 id="栗子：leetcode-169-多数元素"><a href="#栗子：leetcode-169-多数元素" class="headerlink" title="栗子：leetcode:169. 多数元素"></a>栗子：<a href="https://leetcode-cn.com/problems/majority-element/">leetcode:169. 多数元素</a></h3><ul><li><p>基本思路：</p><p>  对于题意而言，有一个数出现次数超过半数，那么这个数出现的次数减去其他所有数出现的次数和肯定是正数，故可以定义一个a来记录当前的数，定义一个cnt来记录当前数的相对个数，对数组内的数一次遍历而言</p><p>  1.若当前数为a，则cnt加1</p><p>  2.若当前的数不为a，则cnt减1，当cnt为0的时候，将a替换成当前的数，cnt重置为1</p><p>  遍历结束之后的a一定为数组中出现次数最多的数</p></li><li><p>代码：</p></li></ul><pre class="line-numbers language-none"><code class="language-none">class Solution &#123;public:    int majorityElement(vector&lt;int&gt;&amp; nums) &#123;        int cnt &#x3D; 1, ans &#x3D; nums[0];&#x2F;&#x2F;初始的ans设置为第一个数，出现次数cnt为1        for (int i &#x3D; 1; i &lt; nums.size(); i ++ )&#123;            if (ans !&#x3D; nums[i])&#123;                cnt --;                if (cnt &lt; 0)&#123;                    cnt &#x3D; 1;                    ans &#x3D; nums[i];                &#125;            &#125; else cnt ++;        &#125;        return ans;    &#125;&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 选择 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>阶乘的因式分解</title>
+      <link href="/2022/01/24/jie-cheng-de-yin-shi-fen-jie/"/>
+      <url>/2022/01/24/jie-cheng-de-yin-shi-fen-jie/</url>
+      
+        <content type="html"><![CDATA[<h3 id="基本思路："><a href="#基本思路：" class="headerlink" title="基本思路："></a>基本思路：</h3><ul><li><p>对于已知的<code>n</code>，可以通过以下公式求出因子的个数</p>  <pre class="line-numbers language-none"><code class="language-none">cnt &#x3D; n &#x2F; a + n &#x2F; a^2 + n &#x2F; a^3 + ........<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>代码如下：</p>  <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int display(int n, int a) &#123;   int ans &#x3D; 0;       while (n)&#123;           ans +&#x3D; n &#x2F; a;           n &#x2F;&#x3D; a;       &#125;       return ans;   &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li></ul><h3 id="例子：leetcode-172-阶乘后的零"><a href="#例子：leetcode-172-阶乘后的零" class="headerlink" title="例子：leetcode 172. 阶乘后的零"></a>例子：<a href="https://leetcode-cn.com/problems/factorial-trailing-zeroes/">leetcode 172. 阶乘后的零</a></h3><blockquote><p>   对于此题就是求阶乘数<code>10</code>的因子个数，而<code>10 = 2 x 5</code>,所以只用求出阶乘里<code>2</code>和<code>5</code>两个因子中最少那一个的个数，在&gt;<code>10</code>以内只有一个<code>5</code>,而<code>2</code> <code>4</code> <code>6</code> <code>8</code>都会有<code>2</code>这个因子，故只用求阶乘中<code>5</code>的因子个数即可，</p>   <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int trailingZeroes(int n) &#123;     int ans &#x3D; 0;     while (n)&#123;         ans +&#x3D; n &#x2F; 5;         n &#x2F;&#x3D; 5;     &#125;     return ans; &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></blockquote><h3 id="进阶：leetcode-793-阶乘函数后-K-个零"><a href="#进阶：leetcode-793-阶乘函数后-K-个零" class="headerlink" title="进阶：leetcode 793.阶乘函数后 K 个零"></a>进阶：<a href="https://leetcode-cn.com/problems/preimage-size-of-factorial-zeroes-function/">leetcode 793.阶乘函数后 K 个零</a></h3><blockquote><p>   此题在栗子的基础之上，对于阶乘<code>n</code>是不确定的，需要找到所有末尾<code>0</code>的个数为<code>K</code>的<code>n</code>的个数，为了不超时，我在此处使&gt;用了二分查找，时间复杂度为<code>O(log(n))</code>,而计算<code>0</code>的个数的时间复杂度为<code>O(n)</code>,总时间复杂度为<code>O(nlog(n))</code></p>   <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">  typedef long long int LL;class Solution &#123;public:    int preimageSizeFZF(int k) &#123;        &#x2F;&#x2F;cout &lt;&lt; cal(k) &lt;&lt; &#39; &#39; &lt;&lt; f(cal(k)) &lt;&lt; endl;        &#x2F;&#x2F;cout &lt;&lt; cal(k - 1) &lt;&lt; &#39; &#39; &lt;&lt; f(cal(k - 1)) &lt;&lt; endl;        return cal(k) - cal(k - 1);    &#125;    LL f(LL x)&#123;        LL ans &#x3D; 0;        while (x)&#123;            ans +&#x3D; x &#x2F; 5;            x &#x2F;&#x3D; 5;        &#125;        return ans;    &#125;&#x2F;&#x2F;二分查找    LL cal(int k)&#123;         LL l &#x3D; -1, r &#x3D; 1e18;        while (l &lt; r)&#123;            LL mid &#x3D; l + r + 1 &gt;&gt; 1;            if (f(mid) &lt;&#x3D; k) l &#x3D; mid;            else r &#x3D; mid - 1;        &#125;        return r;    &#125;&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学知识 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>排序非数字类型</title>
+      <link href="/2022/01/23/zi-ding-yi-bi-jiao-han-shu/"/>
+      <url>/2022/01/23/zi-ding-yi-bi-jiao-han-shu/</url>
+      
+        <content type="html"><![CDATA[<h2 id="方法一：自定义比较函数"><a href="#方法一：自定义比较函数" class="headerlink" title="方法一：自定义比较函数"></a>方法一：自定义比较函数</h2><ul><li><p><code>sort</code>函数第三个参数可以供我们自定义比较的方法，可以直接定义一个<code>comparison</code>函数：</p>  <pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;algorithm&gt;using namespace std;typedef pair&lt;int, int&gt; PII;vector&lt;PII&gt; table;bool comparison(PII a, PII b)&#123; &#x2F;&#x2F;自定义的比较函数   return a.first &lt; b.first;  &#x2F;&#x2F;&#96;&lt;&#96;就是从小到大排序&#125;int main()&#123;   PII a &#x3D; &#123;1, 3&#125;;   PII b &#x3D; &#123;2, 2&#125;;   PII c &#x3D; &#123;3, 1&#125;;   table.push_back(a);   table.push_back(b);   table.push_back(c);   sort(table.begin(), table.end(), comparison); &#x2F;&#x2F;第三个参数为你的比较方法      for (auto item : table)   &#123;       cout &lt;&lt; item.first &lt;&lt; &#39; &#39; &lt;&lt; item.second &lt;&lt; endl;   &#125;      return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>  输出的结果为：</p>  <pre class="line-numbers language-none"><code class="language-none">1 32 23 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li></ul><h2 id="方法二：重载-lt-运算符"><a href="#方法二：重载-lt-运算符" class="headerlink" title="方法二：重载&lt;运算符"></a>方法二：重载<code>&lt;</code>运算符</h2><ul><li><p>结构体和类都可以使用此方法</p><p>  1.结构体中：</p>  <pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;using namespace std;struct Miss&#123;   int fir;   int sec;   Miss(int x, int y) : fir(x), sec(y) &#123;&#125; &#x2F;&#x2F;构造方法，在主函数中使用的时候是 Miss* 类型&#125;;bool operator&lt;(const Miss&amp; a, const Miss&amp; b)&#123; &#x2F;&#x2F;重载运算符&lt;        return a.fir &lt; b.fir; &#125;int main()&#123;   auto a &#x3D; new Miss(1, 3);   auto b &#x3D; new Miss(3, 1);   if (b &lt; a) cout &lt;&lt; &quot;a大于b&quot; &lt;&lt; endl; &#x2F;&#x2F; 仅仅重载了&#96;&lt;&#96;   else cout &lt;&lt; &quot;b大于a&quot; &lt;&lt; endl;      return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>  2.类中：</p>  <pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;using namespace std;class Miss&#123;    public:        Miss(int x, int y) : fir(x), sec(y) &#123;&#125;;        bool operator&lt;(const Miss&amp; a)&#123; &#x2F;&#x2F;重载运算符            return this-&gt;fir &lt; a.fir;        &#125;    private:        int fir;        int sec;&#125;;int main()&#123;    auto a &#x3D; Miss(1, 3);    auto b &#x3D; Miss(3, 1);       if (a &lt; b) cout &lt;&lt; &quot;a&quot;;    else cout &lt;&lt; &quot;b&quot;;    return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li></ul><hr><hr><h3 id="1-29新增例子"><a href="#1-29新增例子" class="headerlink" title="1.29新增例子"></a>1.29新增例子</h3><ul><li><p><a href="https://leetcode-cn.com/problems/the-number-of-weak-characters-in-the-game/">Leetcode:1996. 游戏中弱角色的数量</a></p></li><li><p>思路：                </p><p>  1.我们可以先对第一个数进行从大到小排序，排序后第一个数为非严格递增的，则就可以从头开始遍历并记录此时第二个数最大的值，若在在遍历过程中存在数小于记录的最大值，则它肯定是弱角色</p><p>  2.但是如果第一个数相同，而第二个数不相同，则上述算法存在漏算的问题，故在排序的过程中还要对第一个数进行分组，并将第一个相同的数根据第二个数从小到大排序，则在遍历的过程中，对于第一个数相同的数容器，会先遍历第二个数较小的</p></li><li><p>Leetcode代码：</p></li></ul><pre class="line-numbers language-none"><code class="language-none">bool comparison(vector&lt;int&gt; &amp;a, vector&lt;int&gt; &amp;b)&#123;    if (a[0] &#x3D;&#x3D; b[0]) return a[1] &lt; b[1];    else return a[0] &gt; b[0];&#125;class Solution &#123;public:    int numberOfWeakCharacters(vector&lt;vector&lt;int&gt;&gt;&amp; properties) &#123;        int res &#x3D; 0;        sort(properties.begin(), properties.end(), comparison);        int max &#x3D; 0;        for (auto &amp;item : properties)&#123;            if (item[1] &lt; max)&#123;                res ++;            &#125; else &#123;                max &#x3D; item[1];            &#125;        &#125;        return res;    &#125;&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>注：在写比较函数<code>comparison</code>的时候一定要对<code>a</code>和<code>b</code>取地址，不然会超时</strong></p><p><strong>注：在遍历<code>vector</code>的时候对迭代器取地址也能提速</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 排序 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客初探</title>
+      <link href="/2022/01/22/bo-ke-chu-tan/"/>
+      <url>/2022/01/22/bo-ke-chu-tan/</url>
+      
+        <content type="html"><![CDATA[<p>马上就是新年了，我也即将研二下学期，准备为实习做些东西、学点东西，于是开始写博客记录一下过程，第一次搭建博客，也走了不少弯路，花了不少时间，先介绍一哈我的电脑是mac的，全程使用的终端，部署在github上。</p><p><strong>STAR-&gt;&gt;&gt;</strong></p><h3 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h3><h4 id="Github的创建以及Git的安装"><a href="#Github的创建以及Git的安装" class="headerlink" title="Github的创建以及Git的安装"></a><code>Github</code>的创建以及<code>Git</code>的安装</h4><p>这是基本，计算机er都会-&gt;</p><h4 id="nodejs和hexo的安装"><a href="#nodejs和hexo的安装" class="headerlink" title="nodejs和hexo的安装"></a><code>nodejs</code>和<code>hexo</code>的安装</h4><ul><li><p><code>nodejs</code><a href="https://nodejs.org/en/">官网下载</a>,进去后选择自己的系统下载即可</p></li><li><p><code>hexo</code>下载，此处用终端命令下载</p><pre class="line-numbers language-none"><code class="language-none">$ npm install -g hexo-cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li></ul><h4 id="创建一个博客"><a href="#创建一个博客" class="headerlink" title="创建一个博客"></a>创建一个博客</h4><ul><li><p>先创建一个文件夹用来放博客(比如我放在桌面的$blog中)</p><pre class="line-numbers language-none"><code class="language-none">$ cd Desktop$ mkdir blog$ cd blog<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li><li><p>初始化博客<br><code>$ hexo init</code></p></li><li><p>静态部署博客<br><code>$ hexo g</code></p></li><li><p>部署在本地服务器<br><code>$ hexo s</code></p></li><li><p>进入<code>http://localhost:4000</code>查看</p></li></ul><h4 id="部署博客到Github"><a href="#部署博客到Github" class="headerlink" title="部署博客到Github"></a>部署博客到<code>Github</code></h4><ul><li><p>在<code>Github</code>创建新的仓库，命名为 “<code>你的仓库名字</code>.github.io”<br><img src="/medias/%E5%8D%9A%E5%AE%A2%E5%88%9D%E6%8E%A2/1.jpg" alt="图片">  </p></li><li><p>绑定<code>ssh key</code></p><p>1.确定你的电脑是否有<code>ssh key</code></p>  <pre class="line-numbers language-none"><code class="language-none">$ cd ~&#x2F;.ssh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>  如果找不到文件夹就是不存在进入步骤2，存在则进入步骤3</p><p>2.创建一个<code>ssh key</code></p>  <pre class="line-numbers language-none"><code class="language-none">$ ssh-keygen -t rsa -C &quot;your_email@example.com&quot;&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>  之后的设置是设置密码和位置一类的，直接回车即可，想要设置的也可以查看参数自己设置</p><p>3.复制你的<code>ssh key</code>到<code>github上</code>,路径为<code>~/.ssh/id_rsa.pub</code>，随后登陆你的github，在右上的个人中添加公钥</p><p>  <img src="/medias/%E5%8D%9A%E5%AE%A2%E5%88%9D%E6%8E%A2/2.jpg" alt="图片"></p><p>  点击<code>new</code>即可</p></li><li><p>在博客的目录下修改<code>_config.yml</code>来更改博客的配置</p><p>1.打开配置文件<br>  <code>$ vim _config.yml</code></p><p>2.<code>G</code>到底部，修改url为你的github地址</p>  <pre class="line-numbers language-none"><code class="language-none">deploy:type: gitrepository: git@github.com:Ian-Joh&#x2F;Ian-Joh.github.io.git  #你的仓库SSH地址branch: main #你的分支<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>部署博客到<code>Github</code>上</p><blockquote><p>老三件套</p><pre class="line-numbers language-none"><code class="language-none">hexo clean #清除文件hexo g #静态部署hexo d #发布<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></blockquote></li></ul><p><strong>至此博客搭建完毕</strong></p><h4 id="增加主题"><a href="#增加主题" class="headerlink" title="增加主题"></a>增加主题</h4><p>本博客使用的是hexo-theme-matery,具体查看<a href="https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md">Github地址</a></p><hr><center> **华丽的分界线** </center><hr><h3 id="写第一个博客"><a href="#写第一个博客" class="headerlink" title="写第一个博客"></a>写第一个博客</h3><p>部署之后我们来开始写第一篇文章，内容分为三类，分别是草稿、文章和页面，此处只记录草稿<code>post</code>，</p><ul><li><p>使用hexo命令，后面接文章的命名，如‘test’</p><pre class="line-numbers language-none"><code class="language-none">$ hexo new post test<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>之后可以在<code>./source/_post</code>内看到新建的md文件</p></li><li><p>编辑md，使用markdown打开，两个<code>--</code>之间的就是文章的属性，主要的选项功能如下表所示</p><table><thead><tr><th align="left">配置选项</th><th align="left">默认值</th><th align="left">描述</th></tr></thead><tbody><tr><td align="left">title</td><td align="left">Markdown文章名</td><td align="left">文章的标题</td></tr><tr><td align="left">date</td><td align="left">time</td><td align="left">发布时间，强烈建议填写此选项，且最好保证全局唯一</td></tr><tr><td align="left">author</td><td align="left">none</td><td align="left">文章作者</td></tr><tr><td align="left">top</td><td align="left">false</td><td align="left">推荐文章（文章是否置顶），如果 top 值为 true，则会作为首页推荐文章</td></tr><tr><td align="left">hide</td><td align="left">false</td><td align="left">隐藏文章，如果hide值为true，则文章不会在首页显示</td></tr><tr><td align="left">cover</td><td align="left">false</td><td align="left">表示该文章是否需要加入到首页轮播封面中</td></tr><tr><td align="left">mathjax</td><td align="left">none</td><td align="left">是否开启数学公式支持 ，本文章是否开启 mathjax，且需要在主题的 _config.yml 文件中也需要开启才行</td></tr><tr><td align="left">summary</td><td align="left">none</td><td align="left">文章摘要，自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要</td></tr><tr><td align="left">categories</td><td align="left">none</td><td align="left">文章分类，本主题的分类表示宏观上大的分类，只建议一篇文章一个分类</td></tr><tr><td align="left">tags</td><td align="left">none</td><td align="left">文章标签，一篇文章可以多个标签</td></tr></tbody></table><p>  例如：</p>  <pre class="line-numbers language-none"><code class="language-none">title: testdate: 2022-01-22 16:43:04author: Jingtao Fantop: false cover: falsehide: falsecategories: catmathjax: falsesummary: This is a summarytags:   - first  - second<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li></ul><p>** 如此就可以开始写你的第一篇文章辣 **</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> blog </tag>
+            
+            <tag> 入门 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2022/01/21/hello-world/"/>
+      <url>/2022/01/21/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
